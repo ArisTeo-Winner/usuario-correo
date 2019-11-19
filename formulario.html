@@ -1,0 +1,98 @@
+<!doctype html>
+ 
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Desarrollos en PHP - Activacion de Cuenta Via Email</title>
+    <link rel="stylesheet" href="css/jquery-ui.css" />
+	<link rel="stylesheet" href="css/estilo.css" />
+	<link rel="stylesheet" href="css/bootstrap.css" />
+    <script src="js/jquery-1.8.2.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <script>
+	$(document).ready(function(){
+		// Dar el foco al recuadro del código
+		$("#Nombre").focus();	
+		// Al hacer click en el botón para guardar
+		$("form#formulario").submit(function()
+		{
+				var User = new Object();
+				User.Nombre     = $('input#Nombre').val();
+				User.Apellidos  = $('input#Apellidos').val();
+				User.Email      = $('input#Email').val();
+				User.cbSexo       = $('select#cbSexo').val();
+				User.Edad       = $('input#Edad').val();
+				$("#mensaje").append("<div class='modal1'><div class='center1'> <center> <img src='img/gif-load.gif'> Procesando Peticion...</center></div></div>");
+				var DatosJson = JSON.stringify(User);
+				$.post('guarda.php',
+					{ 
+						user: DatosJson
+					},
+					function(data, textStatus) {
+						$("#"+data.campo+"").focus();
+						$("#mensaje").html(data.error_msg);
+					}, 
+					"json"		
+				);
+				return false;
+		});
+	});
+    </script>
+</head>
+<body>
+<center>
+	<form name="formulario" id="formulario" method="post" action="">
+	<table width="50%">
+		<tr>
+			<td><br/><div id="mensaje"></div></td>
+		</tr>
+		<tr>
+			<td><center>
+				<table border=0 class="ventanas" width="70%">
+					<tr>
+    				  <td colspan="2" class="tabla_ventanas_login" height="10"><legend align="center">::: Formulario de Registro ::: </legend></td>
+					</tr>
+					<tr><td colspan=2><br/></td></tr>
+					<tr>
+						<td colspan=2><center>
+							<table>
+								<tr>
+								<td align="right">Nombre: </td><td><input type="text" class="caja"  name="Nombre" id="Nombre" /></td>
+								</tr>
+								
+								<tr>
+								<td align="right">Apellidos: </td><td><input type="text" class="caja"  name="Apellidos" id="Apellidos" /></td>
+								</tr>
+								
+								<tr>
+								<td align="right">Email: </td><td><input type="text" class="caja"  name="Email" id="Email" /></td>
+								</tr>
+								
+								<tr>
+								<td align="right">Sexo: </td>
+								<td>
+									<select  class="caja" id="cbSexo">
+									<option value="Masculino">Masculino</option>
+									<option value="Femenino">Femenino</option>
+									</select>
+								</td>
+								</tr>
+				
+								<tr>
+								<td align="right">Edad: </td><td><input type="text" class="caja"  name="Edad" id="Edad" /></td>
+								</tr>
+								<tr><td colspan=2><center><input type="submit" id="guarda" name="guarda" class="btn btn-sm btn-success" value="Salvar Usuario" /></center></td></tr>
+							</table>
+						</center>
+						</td>
+					</tr>
+				   </table>
+				</center>
+			</td>
+		</tr>
+	</table>
+	</form>
+   
+ </center>
+</body>
+</html>
