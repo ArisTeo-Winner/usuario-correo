@@ -4,11 +4,11 @@ $mail = new PHPMailer;
 $mail->isSMTP();                                      
 $mail->Host = 'smtp.gmail.com';                      
 $mail->SMTPAuth = true;                               // Activamos la autenticacion
-$mail->Username = 'ejemplo@gmail.com';       // Correo SMTP 
-$mail->Password = 'tupassword';                // Contraseña SMTP
+$mail->Username = 'panzhert@gmail.com';       // Correo SMTP 
+$mail->Password = 'Rammstein45';                // Contraseña SMTP
 $mail->SMTPSecure = 'ssl';                            // Activamos la encriptacion ssl
 $mail->Port = 465;                                    // Seleccionamos el puerto del SMTP
-$mail->From = 'ejemplo@gmail.com';
+$mail->From = 'panzhert@gmail.com';
 $mail->FromName = 'Desarrollos PHP';                       
 $mail->isHTML(true); 
 $mail->CharSet = 'UTF-8';  
